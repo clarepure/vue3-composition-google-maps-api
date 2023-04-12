@@ -1,30 +1,88 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="app">
+    <router-view />
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<script>
+import { reactive } from "vue";
+import router from './router';
+
+export default {
+  name: "CheckoutForm",
+  router,
+  methods: {
+    handleSubmit() {
+      alert("form submitted");
+    },
+  },
+  setup() {
+    const form = reactive({
+      firstName: "",
+      lastName: "",
+      email: "",
+      billingAddress: {
+        streetName: "",
+        streetNumber: "",
+        city: "",
+        postcode: "",
+      },
+      deliveryAddress: {
+        streetName: "",
+        streetNumber: "",
+        city: "",
+        postcode: "",
+      },
+    });
+
+    return {
+      form,
+    };
+  },
+};
+</script>
+
+<style lang="css">
+.app {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #434141;
   text-align: center;
-  color: #2c3e50;
 }
-
-nav {
-  padding: 30px;
+.checkout-form {
+  margin: 5px auto;
+  padding: 10px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-nav a {
+.address__field {
+  padding-bottom: 10px;
+  width: 250px;
+  text-align: left;
+}
+label {
+  display: block;
   font-weight: bold;
-  color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+input {
+  padding: 10px;
+  width: 230px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  outline: 0;
+  background: #f8edcf;
+}
+
+button {
+  margin-top: 30px;
+  padding: 10px;
+  width: 250px;
+  color: #f8edcf;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  outline: 0;
+  background: #434141;
 }
 </style>
